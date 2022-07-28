@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket example project</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+    <!--    libs for stomp and sockjs-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <!--    end libs for stomp and sockjs-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+          type="text/css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container clearfix">
+    <div class="people-list" id="people-list">
+        <div class="search">
+            <input id="content" placeholder="текст" type="text"/>
+            <button onclick="sendCommand()" id="sendCommand">Send Command</button>
+            <button onclick="getLogs()" id="getLogs">Get Logs</button>
+        </div>
+        <h3>Список логов</h3>
+        <div class="logs" id="logList" style="border: 1px white solid">
+        </div>
+    </div>
+</div>
+<script src="js/client.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>

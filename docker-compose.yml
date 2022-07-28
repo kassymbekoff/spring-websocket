@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+  spring_dev:
+    build:
+      context: .
+    image: spring_backend
+    container_name: spring-websocket
+    ports:
+      - "8080:8080"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=websocketdb
+    volumes:
+      - "./src:/build/src"
+      - "./target:/build/target:cached"
+    command: "mvn spring-boot:run"
+    networks:
+      - backend
+    depends_on:
+      - spring_dev_db
+  frontend:
+    container_name: frontend_client
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    restart: always
+    networks:
+      - backend
+  spring_dev_db:
+    container_name: spring_dev_db
+    image: "postgres:12"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=websocketdb
+    volumes:
+      - spring_dev_data:/var/lib/postgresql/data1
+    networks:
+      - backend
+volumes:
+  spring_dev_data: {}
+networks:
+  backend:
+    driver: bridge
